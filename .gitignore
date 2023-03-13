@@ -1,0 +1,7 @@
+# Ignore generated binaries with no extension (thanks https://stackoverflow.com/questions/5711120/gitignore-binary-files-that-have-no-extension)
+*
+!*.*
+!*/
+
+# Ignore Windows-executable files
+*.exe
