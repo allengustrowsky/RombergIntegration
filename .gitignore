@@ -5,3 +5,6 @@
 
 # Ignore Windows-executable files
 *.exe
+
+# Note file
+todo.md

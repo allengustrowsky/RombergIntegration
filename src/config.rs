@@ -12,7 +12,7 @@ pub mod romberg_config {
             Values {
                 equation: integrand,
                 lower_bound: 0.0, // EDIT ME! (must be f64)
-                upper_bound: 3.14159, // EDIT ME! (must be f64)
+                upper_bound: std::f64::consts::PI, // EDIT ME! (must be f64)
                 num_iterations: 4 // EDIT ME! (must be i32)
             }
         }
@@ -20,6 +20,6 @@ pub mod romberg_config {
 
     // Edit this function - make it whatever you want it to be as long as it returns f64
     fn integrand(x: f64) -> f64 {
-        x*x
+        x.sin() // in radians
     }
 }
