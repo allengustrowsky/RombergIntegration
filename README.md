@@ -2,6 +2,11 @@
 
 Romberg Integration is a numerical technique used to find an approximation for mathematical functions that cannot be easily integrated. This project allows the integral of a function to be calculated using Romberg Integration.
 
+Romberg Integration technique involves iteration; generally the more iterations you do the more accurate your approximation will be. However, sometimes the answer is reached with very few iterations. You can tell when this is the case when an iteration produces values that are all the same. Making a Romberg table can be helpful for visualizing this. With this program, it is better to start with a few iterations (~5) and look at the table to see if this is the case rather than starting with more iterations and potentially wasting computing power and time.  Here is an example where the answer could be reached in just 2 iterations (but 5 were used):
+
+![the second sweep displays values that are all the same.](5sweeps.png)
+
+
 ## Setup
 - Must have [Rust](https://www.rust-lang.org/tools/install) setup on your machine (_very_ simple)
 
