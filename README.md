@@ -11,6 +11,7 @@ You can configure the following values:
 2. lower limit of integration
 3. upper limit of integration
 4. number of iterations to be performed by the Romberg Algorithm
+5. whether to print the Romberg table produced in the process
 
 The only file that needs to be modified for this to work is `config.rs`. This file contains the `Values` struct that will hold the above config variables. NOTE: the struct declaration should not be touched. The `main.rs` file uses the default values of this struct to perform the algorithm, so to configure the algorithm you just have to change the default values to whatever you want. For example, if you wanted to change the lower bound to be 2.0 and the upper bound to be 4.0, your default values would look like
 ```
@@ -18,13 +19,16 @@ impl Default for Values {
     fn default() -> Self {
         Values {
             equation: integrand,
-            lower_bound: 2.0, // EDIT ME! (must be f64)
-            upper_bound: 4.0, // EDIT ME! (must be f64)
-            num_iterations: 4 // EDIT ME! (must be i32)
+            lower_bound: 0.0, // EDIT ME! (must be f64)
+            upper_bound: std::f64::consts::PI, // EDIT ME! (must be f64)
+            num_iterations: 4, // EDIT ME! (must be usize)
+            print_table: true // EDIT ME!
         }
     }
 }
 ```
+Note: the algorithm will run faster if `print_table` is set to `false`.
+
 You could also change what function you want to integrate by modifying the `integrand` function. For example, to make it the linear function 3x+2, it would look like
 ```
 // Edit this function - make it whatever you want it to be as long as it returns f64

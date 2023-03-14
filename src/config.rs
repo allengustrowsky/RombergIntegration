@@ -5,6 +5,7 @@ pub mod romberg_config {
         pub lower_bound: f64,
         pub upper_bound: f64,
         pub num_iterations: usize,
+        pub print_table: bool,
     }
 
     impl Default for Values {
@@ -13,7 +14,8 @@ pub mod romberg_config {
                 equation: integrand,
                 lower_bound: 0.0, // EDIT ME! (must be f64)
                 upper_bound: std::f64::consts::PI, // EDIT ME! (must be f64)
-                num_iterations: 4 // EDIT ME! (must be i32)
+                num_iterations: 4, // EDIT ME! (must be usize)
+                print_table: true // EDIT ME!
             }
         }
     }

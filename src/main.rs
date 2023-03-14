@@ -27,7 +27,7 @@ fn main() {
         r_table[0].push(fs_coeff * (fa + 2.0*sum + fb));
         sum = 0.0;
     }
-    println!("1st sweep: {:?}", r_table);
+    // println!("1st sweep: {:?}", r_table);
 
     // perform remaining sweeps
     for k in 1..params.num_iterations { // references array
@@ -49,21 +49,24 @@ fn main() {
     // println!("result: {}", r_table[params.num_iterations-1][0]);
 
     // print result
-    println!("Result: {}\n", r_table[params.num_iterations-1][0]);
+    println!("Result: {}", r_table[params.num_iterations-1][0]);
     // print Romberg table 
-    let wer: String = String::from("hello");
-    for row in 0..r_table.len() {
-        print!("{:^29}", format!("{} {}", String::from("sweep"), row + 1));
-    }
-    println!("\n");
-    for row in 0..r_table.len() {
-        for j in 0..(row+1) { // first index above (DELETE ME AFTER)
-            if r_table[j][row-j].abs() < 1.0 { // prevent 0.00000000001957293791
-                print!("|  {:<23}  |", format!("{:+e}", r_table[j][row-j]));
-            } else {
-                print!("|  {:<23}  |", r_table[j][row-j]);
-            }
-        }
+    if params.print_table {
         println!();
+        let wer: String = String::from("hello");
+        for row in 0..r_table.len() {
+            print!("{:^29}", format!("{} {}", String::from("sweep"), row + 1));
+        }
+        println!("\n");
+        for row in 0..r_table.len() {
+            for j in 0..(row+1) { // first index above (DELETE ME AFTER)
+                if r_table[j][row-j].abs() < 1.0 { // prevent 0.00000000001957293791
+                    print!("|  {:<23}  |", format!("{:+e}", r_table[j][row-j]));
+                } else {
+                    print!("|  {:<23}  |", r_table[j][row-j]);
+                }
+            }
+            println!();
+        }
     }
 }
