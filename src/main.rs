@@ -43,27 +43,27 @@ fn main() {
             // println!("safe2");
             sum = 0.0;
         }
-        println!("sweep {}: {:?}", k+1, r_table);
+        // println!("sweep {}: {:?}", k+1, r_table);
     }
     // println!("done: {:?}", r_table);
     // println!("result: {}", r_table[params.num_iterations-1][0]);
 
     // print result
-    println!("Result: {}", r_table[params.num_iterations-1][0]);
+    println!("Result: {}\n", r_table[params.num_iterations-1][0]);
     // print Romberg table 
-
-    
-
-
-    // pseudocode
-    // for first iteartion count
-        // calculate initial values (R11, R21, R31, etc.)
-    // for rest of the iteration counts startint at k, j = k:
-        // c = 1.0 / ((4i64.pow(j-1))-1 as f64)
-        // Rkj = Rk(j-1) + c(Rk(j-1) - R(k-1)(j-1))
-
-        // for c: beware of integer division!! must be 1.0/3.0, not 1/3; could use (my_num as f64)/(other_num as f64)
-
-    // let result: f64 = (params.equation)(std::f64::consts::PI);
-    // println!("function evaluation at pi: {}", result);
+    let wer: String = String::from("hello");
+    for row in 0..r_table.len() {
+        print!("{:^29}", format!("{} {}", String::from("sweep"), row + 1));
+    }
+    println!("\n");
+    for row in 0..r_table.len() {
+        for j in 0..(row+1) { // first index above (DELETE ME AFTER)
+            if r_table[j][row-j].abs() < 1.0 { // prevent 0.00000000001957293791
+                print!("|  {:<23}  |", format!("{:+e}", r_table[j][row-j]));
+            } else {
+                print!("|  {:<23}  |", r_table[j][row-j]);
+            }
+        }
+        println!();
+    }
 }
