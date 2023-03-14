@@ -27,7 +27,7 @@ impl Default for Values {
     }
 }
 ```
-Note: the algorithm will run faster if `print_table` is set to `false`. Also, the table gets jumbled if `num_iterations` is set above ~6, depending on your screen size.
+Note: the algorithm will run faster if `print_table` is set to `false`. Also, the table works best for low iteration counts and will get jumbled if `num_iterations` is set above ~6, depending on your screen size.
 
 You could also change what function you want to integrate by modifying the `integrand` function. For example, to make it the linear function 3x+2, it would look like
 ```
