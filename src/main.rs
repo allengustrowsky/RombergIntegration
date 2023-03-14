@@ -1,8 +1,10 @@
 mod config;
 use config::romberg_config;
 use std::convert::TryInto;
+use std::time::{Duration, Instant};
 
 fn main() {
+    let start_time = Instant::now();
     let params: romberg_config::Values = Default::default();
 
     let h: f64 = params.upper_bound - params.lower_bound;
@@ -48,9 +50,13 @@ fn main() {
     // println!("done: {:?}", r_table);
     // println!("result: {}", r_table[params.num_iterations-1][0]);
 
+    // elapsed time adapted from https://rust-lang-nursery.github.io/rust-cookbook/datetime/duration.html#measure-the-elapsed-time-between-two-code-sections
+    let calc_time = start_time.elapsed();
+
     // print result
     println!("Result: {}", r_table[params.num_iterations-1][0]);
     println!("Sweeps: {}", params.num_iterations);
+    println!("Time to calculate: {:?}", calc_time);
     // print Romberg table 
     if params.print_table {
         println!();
