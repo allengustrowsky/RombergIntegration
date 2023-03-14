@@ -1,5 +1,6 @@
 mod config;
 use config::romberg_config;
+use std::convert::TryInto;
 
 fn main() {
     let params: romberg_config::Values = Default::default();
@@ -8,7 +9,7 @@ fn main() {
     let mut fs_coeff: f64; // coefficient for expression in first sweep
     let mut c: f64; // coefficient for second expression in sweeps 2+
     let mut sum: f64 = 0.0; // used in first sweep only
-    c = 1.0 / (((4i64.pow(2))-1) as f64);
+    // c = 1.0 / (((4i64.pow(2))-1) as f64);
     // initialize Romberg table
     let mut r_table: Vec<Vec<f64>> = vec![vec![]; params.num_iterations as usize];
     
@@ -29,15 +30,29 @@ fn main() {
     println!("1st sweep: {:?}", r_table);
 
     // perform remaining sweeps
-    for k in 1..params.num_iterations {
-        println!("i: {}", k);
-        // 2nd sweep
-        for j in k..params.num_iterations {
-            r_table[k].push(j as f64);
+    for k in 1..params.num_iterations { // references array
+        // println!("i: {}", k);
+        c = 1.0 / (((4i64.pow(k as u32))-1) as f64);
+        // println!("c: {}", c);
+        for j in 1..(params.num_iterations-k+1) { // references array index
+            // println!("j: {}", j);
+            // println!("{} + {}*({} - {})", r_table[k-1][j], c, r_table[k-1][j], r_table[k-1][j-1]);
+            sum = r_table[k-1][j] + c*(r_table[k-1][j] - r_table[k-1][j-1]);
+            // println!("safe!");
+            r_table[k].push(sum);
+            // println!("safe2");
+            sum = 0.0;
         }
+        println!("sweep {}: {:?}", k+1, r_table);
     }
-    println!("done: {:?}", r_table);
-    println!("result: {}", r_table[params.num_iterations-1][0]);
+    // println!("done: {:?}", r_table);
+    // println!("result: {}", r_table[params.num_iterations-1][0]);
+
+    // print result
+    println!("Result: {}", r_table[params.num_iterations-1][0]);
+    // print Romberg table 
+
+    
 
 
     // pseudocode
