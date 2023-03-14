@@ -22,6 +22,6 @@ pub mod romberg_config {
 
     // Edit this function - make it whatever you want it to be as long as it returns f64
     fn integrand(x: f64) -> f64 {
-        x.sin() // in radians
+        x.sin() // in radians, omit trailing semi-colon
     }
 }
