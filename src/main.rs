@@ -4,17 +4,27 @@ use config::romberg_config;
 fn main() {
     let params: romberg_config::Values = Default::default();
 
-    let _h: f64= params.upper_bound - params.lower_bound;
-    let _c: f64;
-    _c = 1.0 / (((4i64.pow(2))-1) as f64);
+    let h: f64 = params.upper_bound - params.lower_bound;
+    let mut fs_coeff: f64; // coefficient for expression in first sweep
+    let mut c: f64; // coefficient for second expression in sweeps 2+
+    let mut sum: f64 = 0.0; // used in first sweep only
+    c = 1.0 / (((4i64.pow(2))-1) as f64);
     // initialize Romberg table
     let mut r_table: Vec<Vec<f64>> = vec![vec![]; params.num_iterations as usize];
-    println!("r_table: {:?}", r_table);
     
     // 1st sweep
     for i in 0..params.num_iterations {
-        // println!("o: {}", i);
-        r_table[0].push(i as f64);
+        fs_coeff = h / (2i64.pow((i as u32)+1) as f64); // h/2, h/4, ...
+        let fa: f64 = (params.equation)(params.lower_bound);
+        let fb: f64 = (params.equation)(params.upper_bound);
+        for n_coeff in 1..2i64.pow(i as u32) {
+            sum += (params.equation)(params.lower_bound + ((h*(n_coeff as f64)) / (2i64.pow(i as u32)) as f64));
+            // println!("f({} + {}h/{})", params.lower_bound, n_coeff as f64, (2i64.pow(i as u32)) as f64);
+        }
+        // println!("fa: {}", fa);
+        // println!("final: {}[{} + 2({}) + {}]", fs_coeff, fa, sum, fb);
+        r_table[0].push(fs_coeff * (fa + 2.0*sum + fb));
+        sum = 0.0;
     }
     println!("1st sweep: {:?}", r_table);
 
@@ -27,6 +37,7 @@ fn main() {
         }
     }
     println!("done: {:?}", r_table);
+    println!("result: {}", r_table[params.num_iterations-1][0]);
 
 
     // pseudocode
