@@ -46,19 +46,23 @@ fn main() {
     // print Romberg table 
     if params.print_table {
         println!();
-        for row in 0..r_table.len() {
-            print!("{:^29}", format!("{} {}", String::from("sweep"), row + 1));
-        }
-        println!("\n");
-        for row in 0..r_table.len() {
-            for j in 0..(row+1) { // first index above (DELETE ME AFTER)
-                if r_table[j][row-j].abs() < 1.0 { // prevent 0.00000000001957293791
-                    print!("|  {:<23}  |", format!("{:+e}", r_table[j][row-j]));
-                } else {
-                    print!("|  {:<23}  |", r_table[j][row-j]);
-                }
+        print_table(r_table);
+    }
+}
+
+fn print_table(r_table: Vec<Vec<f64>>) {
+    for row in 0..r_table.len() {
+        print!("{:^29}", format!("{} {}", String::from("sweep"), row + 1));
+    }
+    println!("\n");
+    for row in 0..r_table.len() {
+        for j in 0..(row+1) { // first index above (DELETE ME AFTER)
+            if r_table[j][row-j].abs() < 1.0 { // prevent 0.00000000001957293791
+                print!("|  {:<23}  |", format!("{:+e}", r_table[j][row-j]));
+            } else {
+                print!("|  {:<23}  |", r_table[j][row-j]);
             }
-            println!();
         }
+        println!();
     }
 }
