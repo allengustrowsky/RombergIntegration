@@ -11,6 +11,23 @@ fn main() {
     let mut r_table: Vec<Vec<f64>> = vec![vec![]; params.num_iterations as usize];
     println!("r_table: {:?}", r_table);
     
+    // 1st sweep
+    for i in 0..params.num_iterations {
+        // println!("o: {}", i);
+        r_table[0].push(i as f64);
+    }
+    println!("1st sweep: {:?}", r_table);
+
+    // perform remaining sweeps
+    for k in 1..params.num_iterations {
+        println!("i: {}", k);
+        // 2nd sweep
+        for j in k..params.num_iterations {
+            r_table[k].push(j as f64);
+        }
+    }
+    println!("done: {:?}", r_table);
+
 
     // pseudocode
     // for first iteartion count
