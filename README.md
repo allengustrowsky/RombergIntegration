@@ -1,6 +1,6 @@
 # Romberg Intergration
 
-Romberg Integration is a numerical technique used to find an approximation for mathematical functions that cannot be easily integrated. This project allows the integral of a function to be calculated using Romberg Integration.
+Romberg Integration is a numerical technique used to find an approximation for mathematical functions that cannot be easily integrated. This project allows the integral of a function to be calculated using Romberg Integration. It is designed to be used by someone with a small amount of programming experience and little to no knowledge of Rust.
 
 Romberg Integration technique involves iteration; generally the more iterations you do the more accurate your approximation will be. However, sometimes the answer is reached with very few iterations. You can tell when this is the case when an iteration produces values that are all the same. Making a Romberg table can be helpful for visualizing this. With this program, it is better to start with a few iterations (~5) and look at the table to see if this is the case rather than starting with more iterations and potentially wasting computing power and time.  Here is an example where the answer could be reached in just 2 iterations (but 5 were used):
 
@@ -46,6 +46,9 @@ That's it!  Now just compile and run:
 - Run the binary that was just generated. May vary by operating system, but on mac run `./main`
 
 ## Limitations / Guidelines
+- when customizing the function to integrate, all numers must be expressed as floats (e.g., 4 -> 4.0) to prevent the compiler from complaining
 - num_iterations must be > 0
 - lower_bound must be < upper_bound
 - function must be continuous on [lower_bound, upper_bound] and differentiable on (lower_bound, upper_bound)
+- large answers may lose precision (e.g., integrating x^22 from 0 to 11 with 9 iterations)
+    - in general, avoid using excessively large numbers for values upper and lower bounds
