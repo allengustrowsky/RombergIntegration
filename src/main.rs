@@ -7,7 +7,10 @@ fn main() {
     let _h: f64= params.upper_bound - params.lower_bound;
     let _c: f64;
     _c = 1.0 / (((4i64.pow(2))-1) as f64);
-    println!("c: {}", _c);
+    // initialize Romberg table
+    let mut r_table: Vec<Vec<f64>> = vec![vec![]; params.num_iterations as usize];
+    println!("r_table: {:?}", r_table);
+    
 
     // pseudocode
     // for first iteartion count
@@ -18,9 +21,6 @@ fn main() {
 
         // for c: beware of integer division!! must be 1.0/3.0, not 1/3; could use (my_num as f64)/(other_num as f64)
 
-    println!("lower bound: {}", params.lower_bound);
-    println!("upper bound: {}", params.upper_bound);
-    println!("iter count: {}", params.num_iterations);
-    let result: f64 = (params.equation)(std::f64::consts::PI);
-    println!("function evaluation at pi: {}", result);
+    // let result: f64 = (params.equation)(std::f64::consts::PI);
+    // println!("function evaluation at pi: {}", result);
 }
