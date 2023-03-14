@@ -50,6 +50,7 @@ fn main() {
 
     // print result
     println!("Result: {}", r_table[params.num_iterations-1][0]);
+    println!("Sweeps: {}", params.num_iterations);
     // print Romberg table 
     if params.print_table {
         println!();
