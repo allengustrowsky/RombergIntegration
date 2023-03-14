@@ -44,3 +44,8 @@ fn integrand(x: f64) -> f64 {
 That's it!  Now just compile and run:
 - To run, cd to `src` and run `rustc main.rs`
 - Run the binary that was just generated. May vary by operating system, but on mac run `./main`
+
+## Limitations / Guidelines
+- num_iterations must be > 0
+- lower_bound must be < upper_bound
+- function must be continuous on [lower_bound, upper_bound] and differentiable on (lower_bound, upper_bound)
