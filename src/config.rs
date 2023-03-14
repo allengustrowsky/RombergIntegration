@@ -4,7 +4,7 @@ pub mod romberg_config {
         pub equation: fn(f64) -> f64,
         pub lower_bound: f64,
         pub upper_bound: f64,
-        pub num_iterations: i32,
+        pub num_iterations: usize,
     }
 
     impl Default for Values {
